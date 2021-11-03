@@ -5,6 +5,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="sl">
 				<title>Domov | Viberate</title>
+				<Head />
 				<body>
 					<Main />
 					<NextScript />
