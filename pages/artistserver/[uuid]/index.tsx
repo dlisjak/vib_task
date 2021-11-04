@@ -7,7 +7,6 @@ import orderBy from 'lodash.orderby';
 import Button from '../../../components/Button';
 
 import { getArtist } from '../../api/artist';
-import { getArtists } from '../../api/artists';
 import { useArtist } from '../../../queries';
 
 const Index = ({ uuid, artist }) => {
@@ -131,27 +130,14 @@ const Index = ({ uuid, artist }) => {
   );
 };
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const uuid = ctx.params.uuid;
   const response = await getArtist(uuid);
   const artist = ((response || {}).artist || {}).data || null;
 
   return {
     props: { uuid, artist },
-    revalidate: 3600, // In seconds
   };
-}
-
-export async function getStaticPaths() {
-  const { artists } = await getArtists();
-  const paths = (artists || []).map((artist) => ({
-    params: { uuid: artist.artist_uuid },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
-  return { paths, fallback: 'blocking' };
 }
 
 export default Index;

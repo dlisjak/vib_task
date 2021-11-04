@@ -6,8 +6,8 @@ const Button = (props) => {
       variant="unstyled"
       borderRadius={0}
       display="flex"
-      pt={4}
-      pb={4}
+      pt={2}
+      pb={2}
       pl={6}
       pr={6}
       {...props}
